@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 async function getPost(id) {
+  id = decodeURIComponent(id);
   const res = await fetch(process.env.GRAPHQL_STRING, {
     method: "POST",
     headers: {
@@ -25,9 +26,9 @@ async function getPost(id) {
 }
 
 export async function generateMetadata({ params }) {
+  const articles = await getPost(params.id);
   let url = `https://infinity.itsdope.in/article/${params.id}`;
   params.id = decodeURIComponent(params.id);
-  const articles = await getPost(params.id);
   if (articles.legnth > 0) {
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
@@ -90,6 +91,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function Article({ params }) {
-  return <></>;
+export default async function Article({ params }) {
+  const articles = await getPost(params.id);
+  return <>{articles.legnth > 0 ? <></> : <></>}</>;
 }
