@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "./article.css";
 
 async function getPost(id) {
   id = decodeURIComponent(id);
@@ -25,21 +26,40 @@ async function getPost(id) {
   return res.json();
 }
 
+async function createPost(id) {
+  id = decodeURIComponent(id);
+  const res = await fetch(process.env.GRAPHQL_STRING, {
+    method: "POST",
+    headers: {
+      apikey: process.env.GRAPHQL_API,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      mutation: `
+      {
+        insertOneArticle (data : {title:"Some content", description:""}) 
+      }
+    `,
+    }),
+  });
+  return res.json();
+}
+
 export async function generateMetadata({ params }) {
   const articles = await getPost(params.id);
   let url = `https://infinity.itsdope.in/article/${params.id}`;
   params.id = decodeURIComponent(params.id);
   if (articles.data.articles.length > 0) {
-    if (articles.data.articles[0].description == undefined) {
-      articles.data.articles[0].description = "No description";
+    if (articles.data.articles[0].article == undefined) {
+      articles.data.articles[0].article = "No description";
     }
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
-      description: articles.data.articles[0].description.slice(0, 150),
+      description: articles.data.articles[0].article.slice(0, 150),
       keywords: ["Infinity", "Dope", "Articles"],
       openGraph: {
         title: `${params.id[0].toUpperCase() + params.id.slice(1)} | Infinity`,
-        description: articles.data.articles[0].description.slice(0, 150),
+        description: articles.data.articles[0].article.slice(0, 150),
         url: url,
         siteName: "Infinity",
         images: [
@@ -56,7 +76,7 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: "summary_large_image",
         title: `${params.id[0].toUpperCase() + params.id.slice(1)} | Infinity`,
-        description: articles.data.articles[0].description.slice(0, 150),
+        description: articles.data.articles[0].article.slice(0, 150),
         images: [
           articles.data.articles[0].image ||
             "https://infinity.itsdope.in/article-fallback.png",
@@ -96,5 +116,31 @@ export async function generateMetadata({ params }) {
 
 export default async function Article({ params }) {
   const articles = await getPost(params.id);
-  return <>{articles.data.articles.length > 0 ? <>1</> : <>0</>}</>;
+  params.id = decodeURIComponent(params.id);
+  return (
+    <>
+      {articles.data.articles.length > 0 ? (
+        <div className="article">
+          <article>
+            <center className="title">
+              <h1>{params.id[0].toUpperCase() + params.id.slice(1)}</h1>
+            </center>
+            <p
+              className="content"
+              dangerouslySetInnerHTML={{
+                __html: articles.data.articles[0].article,
+              }}
+            ></p>
+          </article>
+        </div>
+      ) : (
+        <div className="article-not-found">
+          <p>
+            No Article with the title exists. However you can generate one now
+            at the bottom of the page.
+          </p>
+        </div>
+      )}
+    </>
+  );
 }

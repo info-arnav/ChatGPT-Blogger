@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import "./globals.css";
 
 export const metadata = {
@@ -50,6 +53,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const [value, setValue] = useState("");
   return (
     <html lang="en">
       <head />
@@ -61,7 +65,7 @@ export default function RootLayout({ children }) {
         </nav>
         <div className="nav-space"></div>
         <main>{children}</main>
-        <footer>
+        <footer id="#footer">
           <div className="cols">
             <div className="rows">
               <Link href="/">
@@ -96,13 +100,19 @@ export default function RootLayout({ children }) {
           </div>
           <div className="cols">
             <div className="rows">
-              <h2>Generate New Article</h2>
+              <h2>Request New Article</h2>
             </div>
             <div className="rows">
-              <input placeholder="Enter Title"></input>
+              <input
+                placeholder="Enter Title"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              ></input>
             </div>
             <div className="rows">
-              <button>Generate Article</button>
+              <button onClick={(e) => requestPost(value)}>
+                Request Article
+              </button>
             </div>
           </div>
         </footer>
