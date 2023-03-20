@@ -11,6 +11,11 @@
       "src": "/apple-icon.png",
       "type": "image/png",
       "sizes": "273x278"
+    },
+    {
+      "src": "/square-icon.png",
+      "type": "image/png",
+      "sizes": "273x273"
     }
   ],
   "start_url": "/",
