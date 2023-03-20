@@ -30,20 +30,23 @@ export async function generateMetadata({ params }) {
   let url = `https://infinity.itsdope.in/article/${params.id}`;
   params.id = decodeURIComponent(params.id);
   if (articles.data.articles.length > 0) {
+    if (articles.data.articles[0].description == undefined) {
+      articles.data.articles[0].description = "No description";
+    }
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
-      description:
-        "Infinity is a place to view AI generated blogs on a hige amount of topics",
+      description: articles.data.articles[0].description.slice(0, 150),
       keywords: ["Infinity", "Dope", "Articles"],
       openGraph: {
         title: `${params.id[0].toUpperCase() + params.id.slice(1)} | Infinity`,
-        description:
-          "Infinity is a place to view AI generated blogs on a hige amount of topics",
+        description: articles.data.articles[0].description.slice(0, 150),
         url: url,
         siteName: "Infinity",
         images: [
           {
-            url: "https://infinity.itsdope.in/logo.png",
+            url:
+              articles.data.articles[0].description ||
+              "https://infinity.itsdope.in/article-fallback.png",
             width: 491,
             height: 500,
             alt: "This is the logo of Infinity",
@@ -55,9 +58,11 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: "summary_large_image",
         title: `${params.id[0].toUpperCase() + params.id.slice(1)} | Infinity`,
-        description:
-          "Infinity is a place to view AI generated blogs on a hige amount of topics",
-        images: ["https://infinity.itsdope.in/logo.png"],
+        description: articles.data.articles[0].description.slice(0, 150),
+        images: [
+          articles.data.articles[0].description ||
+            "https://infinity.itsdope.in/article-fallback.png",
+        ],
       },
     };
   } else {
