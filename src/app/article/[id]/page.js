@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
   const articles = await getPost(params.id);
   let url = `https://infinity.itsdope.in/article/${params.id}`;
   params.id = decodeURIComponent(params.id);
-  if (articles.legnth > 0) {
+  if (articles.data.articles.length > 0) {
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
       description:
@@ -93,5 +93,5 @@ export async function generateMetadata({ params }) {
 
 export default async function Article({ params }) {
   const articles = await getPost(params.id);
-  return <>{articles.legnth > 0 ? <></> : <></>}</>;
+  return <>{articles.data.articles.length > 0 ? <>1</> : <>0</>}</>;
 }
