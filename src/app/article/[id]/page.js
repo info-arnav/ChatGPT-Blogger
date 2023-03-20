@@ -25,7 +25,7 @@ async function getPost(id) {
 }
 
 export async function generateMetadata({ params }) {
-  let url = `https://infinity.itsdope.in/${params.id}`;
+  let url = `https://infinity.itsdope.in/article/${params.id}`;
   params.id = decodeURIComponent(params.id);
   const articles = await getPost(params.id);
   if (articles.legnth > 0) {
