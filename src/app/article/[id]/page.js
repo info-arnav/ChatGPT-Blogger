@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
         images: [
           {
             url:
-              articles.data.articles[0].description ||
+              articles.data.articles[0].image ||
               "https://infinity.itsdope.in/article-fallback.png",
             width: 491,
             height: 500,
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
         title: `${params.id[0].toUpperCase() + params.id.slice(1)} | Infinity`,
         description: articles.data.articles[0].description.slice(0, 150),
         images: [
-          articles.data.articles[0].description ||
+          articles.data.articles[0].image ||
             "https://infinity.itsdope.in/article-fallback.png",
         ],
       },
