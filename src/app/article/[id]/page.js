@@ -47,9 +47,7 @@ export async function generateMetadata({ params }) {
             url:
               articles.data.articles[0].image ||
               "https://infinity.itsdope.in/article-fallback.png",
-            width: 491,
-            height: 500,
-            alt: "This is the logo of Infinity",
+            alt: "This is the article theme image",
           },
         ],
         locale: "en-US",
