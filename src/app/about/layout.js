@@ -15,8 +15,8 @@ export const metadata = {
     images: [
       {
         url: "https://infinity.itsdope.in/logo.png",
-        width: 800,
-        height: 600,
+        width: 491,
+        height: 500,
         alt: "This is the logo of Infinity",
       },
     ],

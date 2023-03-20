@@ -5,17 +5,12 @@
     {
       "src": "/logo.png",
       "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "/logo.ico",
-      "type": "image/ico",
-      "sizes": "192x192"
+      "sizes": "491x500"
     },
     {
       "src": "/apple-icon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "273x278"
     }
   ],
   "start_url": "/",
@@ -29,7 +24,7 @@
       "short_name": "Infinity",
       "description": "Read new AI generated blogs.",
       "url": "/",
-      "icons": [{ "src": "/ilogo.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/logo.png", "sizes": "491x500" }]
     }
   ],
   "description": "Infinity is a place to view AI generated blogs on a hige amount of topics"
