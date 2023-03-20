@@ -1,0 +1,36 @@
+{
+  "short_name": "Infinity",
+  "name": "Infinity by Dope",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/logo.ico",
+      "type": "image/ico",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/apple-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "white",
+  "shortcuts": [
+    {
+      "name": "Infinity",
+      "short_name": "Infinity",
+      "description": "Read new AI generated blogs.",
+      "url": "/",
+      "icons": [{ "src": "/ilogo.png", "sizes": "192x192" }]
+    }
+  ],
+  "description": "Infinity is a place to view AI generated blogs on a hige amount of topics"
+}

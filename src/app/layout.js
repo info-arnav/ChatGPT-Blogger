@@ -36,7 +36,6 @@ export const metadata = {
   },
   icons: {
     icon: "/logo.png",
-    shortcut: "/shortcut-icon.png",
     apple: "/apple-icon.png",
   },
   themeColor: "white",
@@ -67,7 +66,7 @@ export default function RootLayout({ children }) {
             <div className="rows">
               <Link href="/">
                 <Image
-                  slt="This the the logo of site infinity"
+                  alt="This the the logo of site infinity"
                   src="/logo.png"
                   width={200}
                   height={200}
