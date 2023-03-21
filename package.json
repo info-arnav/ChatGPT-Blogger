@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "heroku-prebuild": "cd server && npm install && npm run build",
+    "start": "cd server && npm start",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start-next": "next start",
     "lint": "next lint"
   },
   "dependencies": {
