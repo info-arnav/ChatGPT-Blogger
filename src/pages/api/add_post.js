@@ -31,11 +31,18 @@ export default async (request, response) => {
           request.body.prompt
         }", description:"${
               res.choices[0].message.content
-            }", date_created:${new Date()} }) 
+            }", date_created:"${new Date()}" }) 
+
+            {
+              _id
+              article
+              date_created
+              title
+            } 
       }
     `,
           }),
         })
-    )
-    .then((e) => response.json({ status: true }));
+    );
+  response.json({ status: true });
 };
