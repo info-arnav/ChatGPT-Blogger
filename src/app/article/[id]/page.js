@@ -105,7 +105,7 @@ export default async function Article({ params }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: prompt.toLowerCase(),
+        prompt: params.id.toLowerCase(),
       }),
     });
   }
