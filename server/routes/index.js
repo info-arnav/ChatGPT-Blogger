@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
+router.get("/", (req, res) => {
+  res.json({ status: true });
+});
+
 router.post("/add_post", async function (request, response) {
   await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
