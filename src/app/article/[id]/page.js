@@ -26,25 +26,6 @@ async function getPost(id) {
   return res.json();
 }
 
-async function createPost(id) {
-  id = decodeURIComponent(id);
-  const res = await fetch(process.env.GRAPHQL_STRING, {
-    method: "POST",
-    headers: {
-      apikey: process.env.GRAPHQL_API,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      mutation: `
-      {
-        insertOneArticle (data : {title:"Some content", description:""}) 
-      }
-    `,
-    }),
-  });
-  return res.json();
-}
-
 export async function generateMetadata({ params }) {
   const articles = await getPost(params.id);
   let url = `https://infinity.itsdope.in/article/${params.id}`;

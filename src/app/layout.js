@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./globals.css";
 
@@ -52,8 +53,22 @@ export const metadata = {
   },
 };
 
+const requestPost = async (prompt) => {
+  await fetch("https://infinity.itsdope.in/api/add_post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+    }),
+  }).then((data) => router.push(`/article/${prompt.toLowerCase()}`));
+};
+
 export default function RootLayout({ children }) {
   const [value, setValue] = useState("");
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   return (
     <html lang="en">
       <head />
@@ -110,8 +125,14 @@ export default function RootLayout({ children }) {
               ></input>
             </div>
             <div className="rows">
-              <button onClick={(e) => requestPost(value)}>
-                Request Article
+              <button
+                onClick={(e) => {
+                  setLoading(true);
+                  requestPost(value);
+                }}
+                disabled={loading}
+              >
+                {loading ? "Generating....." : "Request Article"}
               </button>
             </div>
           </div>
