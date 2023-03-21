@@ -65,7 +65,7 @@ export async function generateMetadata({ params }) {
       },
     };
   } else {
-    fetch("http://localhost:3000/api/add_post", {
+    fetch("https://infinity.itsdope.in/api/add_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
