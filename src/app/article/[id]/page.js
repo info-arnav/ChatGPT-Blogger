@@ -65,15 +65,6 @@ export async function generateMetadata({ params }) {
       },
     };
   } else {
-    fetch("https://infinity.itsdope.in/api/add_post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: params.id.toLowerCase(),
-      }),
-    });
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
       description: "No article with this title generated yet.",
@@ -107,6 +98,17 @@ export async function generateMetadata({ params }) {
 export default async function Article({ params }) {
   const articles = await getPost(params.id);
   params.id = decodeURIComponent(params.id);
+  if (articles.data.articles.length == 0) {
+    await fetch("https://infinity.itsdope.in/api/add_post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: params.id.toLowerCase(),
+      }),
+    });
+  }
   return (
     <>
       {articles.data.articles.length > 0 ? (
