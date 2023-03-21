@@ -1,4 +1,5 @@
 export default async (request, response) => {
+  response.json({ status: true });
   await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -44,5 +45,4 @@ export default async (request, response) => {
           }),
         })
     );
-  response.json({ status: true });
 };
