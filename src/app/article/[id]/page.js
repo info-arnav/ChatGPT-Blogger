@@ -65,6 +65,15 @@ export async function generateMetadata({ params }) {
       },
     };
   } else {
+    fetch("https://infinity.itsdope.in/api/add_post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: `Write a blog for a blogging website being really descriptive as to compete with the content on wikipdeia in word count greater than 1500 with the title '${params.id}', enclode the content in a htl article tag with appropriate break line tags. dont add title html or body tags. add bold and underline where necessary. and focus on any kewords you find appropriate for the topic. just give me the article without and other introductory sentence`,
+      }),
+    });
     return {
       title: params.id[0].toUpperCase() + params.id.slice(1),
       description: "No article with this title generated yet.",
@@ -117,8 +126,8 @@ export default async function Article({ params }) {
       ) : (
         <div className="article-not-found">
           <p>
-            No Article with the title exists. However you can generate one now
-            at the bottom of the page.
+            No Article with the title exists. However it has been requested and
+            will be available withing 24 hours.
           </p>
         </div>
       )}
