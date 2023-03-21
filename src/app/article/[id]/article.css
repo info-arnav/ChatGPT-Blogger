@@ -9,12 +9,13 @@
 
 .article-not-found {
   height: calc(100vh - 80px);
-  width: 100%;
+  width: calc(100% - 20px);
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   flex-direction: column;
+  margin: 10px;
 }
 
 .article-not-found a {
