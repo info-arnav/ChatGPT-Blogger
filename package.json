@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "heroku-prebuild": "cd server && npm install && npm run build",
+    "heroku-prebuild": "cd server && npm install",
     "start": "cd server && npm start",
     "dev": "next dev",
     "build": "next build",

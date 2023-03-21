@@ -1,16 +1,16 @@
 {
   "name": "server",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "express": "4.18.2"
-  },
-  "devDependencies": {
-    "babel-preset-env": "1.7.0",
-    "create-express-server": "0.0.2"
-  },
   "scripts": {
-    "start": "create-express-server start",
-    "build": "create-express-server build"
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
   }
 }

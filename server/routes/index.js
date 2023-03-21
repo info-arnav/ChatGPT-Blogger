@@ -1,8 +1,7 @@
-import express from "express";
+var express = require("express");
+var router = express.Router();
 
-const app = express();
-
-app.post("/add_post", async function (request, response) {
+router.post("/add_post", async function (request, response) {
   await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -55,4 +54,4 @@ app.post("/add_post", async function (request, response) {
   ``;
 });
 
-app.listen(3000);
+module.exports = router;
