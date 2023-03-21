@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const requestPost = async (prompt) => {
-  await fetch("https://infinity.itsdope.in/api/add_post", {
+  fetch("https://infinity.itsdope.in/api/add_post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
