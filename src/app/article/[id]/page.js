@@ -99,7 +99,7 @@ export default async function Article({ params }) {
   const articles = await getPost(params.id);
   params.id = decodeURIComponent(params.id);
   if (articles.data.articles.length == 0) {
-    await fetch("https://infinity.itsdope.in/api/add_post", {
+    await fetch("http://localhost:5000/add_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

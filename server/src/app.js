@@ -1,9 +1,13 @@
-export default async (request, response) => {
+import express from "express";
+
+const app = express();
+
+app.post("/add_post", async function (request, response) {
   await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API}`,
+      Authorization: `Bearer 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`,
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
@@ -16,33 +20,39 @@ export default async (request, response) => {
     }),
   })
     .then((e) => e.json())
-    .then(
-      async (res) =>
-        await fetch(process.env.GRAPHQL_STRING, {
+    .then(async (res) => {
+      let data = await fetch(
+        "https://us-east-1.aws.realm.mongodb.com/api/client/v2.0/app/chatgpt-yracd/graphql",
+        {
           method: "POST",
           headers: {
-            apikey: process.env.GRAPHQL_API,
+            apikey:
+              "1nNUblzUD65NC0IYfTNb3KvsGaOghczqOWvCPfFlWo8pE1jg08oQVrkCMBrURuZO",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            query: `
-      mutation {
-        insertOneArticle (data : {title:"${
-          request.body.prompt
-        }", description:"${
+            query: ` mutation {
+              insertOneArticle (data : {title:"${
+                request.body.prompt
+              }", description:"${
               res.choices[0].message.content
             }", date_created:"${new Date()}" }) 
-
-            {
-              _id
-              article
-              date_created
-              title
-            } 
-      }
-    `,
+      
+                  {
+                    _id
+                    article
+                    date_created
+                    title
+                  } 
+            }
+            `,
           }),
-        })
-    );
-  response.json({ status: true });
-};
+        }
+      );
+    })
+    .then((e) => e.json())
+    .then((e) => response.json(e));
+  ``;
+});
+
+app.listen(3000);
