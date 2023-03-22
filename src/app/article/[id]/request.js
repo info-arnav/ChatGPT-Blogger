@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const requestPost = async (prompt) => {
-  await fetch("http://server.itsdope.in/add_post", {
+  await fetch("https://server.itsdope.in/add_post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
