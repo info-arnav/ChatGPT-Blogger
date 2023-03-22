@@ -1,9 +1,11 @@
 import Image from "next/image";
 import "./article.css";
+import Request from "./request";
 
 async function getPost(id) {
   id = decodeURIComponent(id);
   const res = await fetch(process.env.GRAPHQL_STRING, {
+    cache: "no-store",
     method: "POST",
     headers: {
       apikey: process.env.GRAPHQL_API,
@@ -98,17 +100,6 @@ export async function generateMetadata({ params }) {
 export default async function Article({ params }) {
   const articles = await getPost(params.id);
   params.id = decodeURIComponent(params.id);
-  if (articles.data.articles.length == 0) {
-    fetch("https://gptblogger.herokuapp.com/add_post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: params.id.toLowerCase(),
-      }),
-    });
-  }
   return (
     <>
       {articles.data.articles.length > 0 ? (
@@ -127,10 +118,8 @@ export default async function Article({ params }) {
         </div>
       ) : (
         <div className="article-not-found">
-          <p>
-            No Article with the title exists. However it has been requested and
-            will be available withing 24 hours.
-          </p>
+          <p>No Article with the title exists.</p>
+          <Request value={params.id.toLowerCase()}></Request>
         </div>
       )}
     </>

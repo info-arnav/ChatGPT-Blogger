@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const requestPost = async (prompt) => {
-  fetch("https://gptblogger.herokuapp.com/add_post", {
+  await fetch("https://gptblogger.herokuapp.com/add_post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,6 @@ const requestPost = async (prompt) => {
       prompt: prompt.toLowerCase(),
     }),
   });
-  await 5;
   return { status: true };
 };
 
@@ -71,9 +70,7 @@ export default function Footer() {
         </div>
         {requested && (
           <div className="rows">
-            <p style={{ fontWeight: "lighter" }}>
-              Request Sent, New article will be available within 24 hours.
-            </p>
+            <p style={{ fontWeight: "lighter" }}>Request Sent.</p>
           </div>
         )}
         <div className="rows">
@@ -83,13 +80,12 @@ export default function Footer() {
               setRequested(false);
               let status = await requestPost(value);
               if (status) {
-                setLoading(false);
-                setRequested(true);
+                router.push(`/article/${value.toLowerCase()}`);
               }
             }}
             disabled={loading}
           >
-            {loading ? "Generating....." : "Request Article"}
+            {loading ? "Generating just 2 min ....." : "Request Article"}
           </button>
         </div>
       </div>
