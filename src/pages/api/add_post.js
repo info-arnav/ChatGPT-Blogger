@@ -30,7 +30,9 @@ export default async (request, response) => {
       mutation {
         insertOneArticle (data : {title:"${
           request.body.prompt
-        }", article:"${res.choices[0].message.content.replaceAll('"', "'")}" }) 
+        }", article:"${res.choices[0].message.content
+              .replaceAll('"', "'")
+              .replaceAll("\n", "")}" }) 
 
             {
               _id
