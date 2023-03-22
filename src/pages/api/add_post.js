@@ -28,9 +28,9 @@ export default async (request, response) => {
           body: JSON.stringify({
             query: `
       mutation {
-        insertOneArticle (data : {title:"${request.body.prompt}", article:"${
-              res.choices[0].message.content
-            }", date_created:"${new Date()}" }) 
+        insertOneArticle (data : {title:"${
+          request.body.prompt
+        }", article:"${res.choices[0].message.content.replaceAll('"', "'")}" }) 
 
             {
               _id
